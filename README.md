@@ -25,7 +25,10 @@ AuraShop Premium is a modern, high-fidelity e-commerce application built with **
 * **Wishlist Sharing**: 1-click WhatsApp wishlist sharing integration.
 
 ### 4. 💳 Interactive Payment Simulation (AuraSecure)
-* **Direct NPCI-Style UPI**: Authentic BHIM/UPI modal with recipient details and 6-digit PIN keypad validation.
+> [!NOTE]
+> **Mock & Simulation Disclaimer**: All payment gateways implemented in this project (UPI, Credit/Debit Cards, Net Banking, and Wallet) are **mock simulations designed for UI/UX testing and demonstration purposes only**. No real financial transactions are performed, and no real bank accounts or credit cards are charged.
+
+* **Direct NPCI-Style UPI**: Authentic BHIM/UPI modal with recipient details and 6-digit PIN keypad validation (`123456` or `999999`).
 * **3D Animated Credit Card**: Interactive virtual card with dynamic front/back 3D flipping CVV focus and mock OTP bank verification.
 * **Net Banking Portal**: Major Indian banks grid with bank login authentication portals.
 * **COD Verification**: Safety captcha verification code prior to order placement.
