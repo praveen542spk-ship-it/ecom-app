@@ -10,7 +10,7 @@ function ProductDetailModal({ product, onClose }) {
   const { addToast } = useToast()
   const navigate = useNavigate()
   const modalRef = useRef(null)
-  const [prevProduct, setPrevProduct] = useState(product)
+
   const [activeProduct, setActiveProduct] = useState(product)
   const [quantity, setQuantity] = useState(1)
   const [reviews, setReviews] = useState([])
@@ -36,16 +36,19 @@ function ProductDetailModal({ product, onClose }) {
     }
   }, [])
 
-  // Adjust state when product prop changes
-  if (product.id !== prevProduct.id) {
-    setPrevProduct(product)
-    setActiveProduct(product)
-    setActiveThumbnailIndex(0)
-    setQuantity(1)
-    setPincode('')
-    setPincodeStatus(null)
-    setSimilarFetchError(null)
-  }
+  // Sync state cleanly when product prop changes
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (product) {
+      setActiveProduct(product)
+      setActiveThumbnailIndex(0)
+      setQuantity(1)
+      setPincode('')
+      setPincodeStatus(null)
+      setSimilarFetchError(null)
+    }
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [product])
 
   // Scroll modal back to top when activeProduct changes
   useEffect(() => {
@@ -247,13 +250,13 @@ function ProductDetailModal({ product, onClose }) {
       style={{
         position: 'fixed',
         top: 0, left: 0, right: 0, bottom: 0,
-        background: 'rgba(15, 25, 35, 0.7)',
+        background: 'rgba(8, 10, 18, 0.85)',
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1100,
-        backdropFilter: 'blur(4px)',
-        padding: '40px 20px',
+        zIndex: 9999,
+        backdropFilter: 'blur(8px)',
+        padding: '20px',
         overflowY: 'auto'
       }} 
       onClick={onClose}
@@ -264,12 +267,14 @@ function ProductDetailModal({ product, onClose }) {
         style={{
           width: '100%',
           maxWidth: '920px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
           borderRadius: 'var(--radius-md)',
           padding: '28px',
           position: 'relative',
-          background: 'var(--bg-card)',
-          margin: 'auto',
-          boxShadow: 'var(--shadow-lg)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-color)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
           display: 'flex',
           flexDirection: 'column',
           gap: '24px'
