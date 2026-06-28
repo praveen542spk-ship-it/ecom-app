@@ -283,8 +283,8 @@ h1, h2, h3, h4, h5, h6, .brand-font {
 .gradient-text {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
@@ -1397,6 +1397,7 @@ nav.custom-navbar {
   letter-spacing: 4px;
   background: linear-gradient(45deg, #f59e0b, #ec4899);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   padding: 4px 12px;
   border-radius: 4px;
