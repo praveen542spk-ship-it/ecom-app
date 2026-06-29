@@ -252,11 +252,11 @@ function ProductDetailModal({ product, onClose }) {
         top: 0, left: 0, right: 0, bottom: 0,
         background: 'rgba(8, 10, 18, 0.85)',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         zIndex: 9999,
         backdropFilter: 'blur(8px)',
-        padding: '20px',
+        padding: '30px 16px',
         overflowY: 'auto'
       }} 
       onClick={onClose}
@@ -267,8 +267,6 @@ function ProductDetailModal({ product, onClose }) {
         style={{
           width: '100%',
           maxWidth: '920px',
-          maxHeight: '90vh',
-          overflowY: 'auto',
           borderRadius: 'var(--radius-md)',
           padding: '28px',
           position: 'relative',
@@ -277,7 +275,8 @@ function ProductDetailModal({ product, onClose }) {
           boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '24px'
+          gap: '24px',
+          margin: 'auto 0'
         }}
         onClick={(e) => e.stopPropagation()}
       >
