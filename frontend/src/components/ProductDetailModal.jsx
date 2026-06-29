@@ -263,15 +263,15 @@ function ProductDetailModal({ product, onClose }) {
     >
       <div 
         ref={modalRef}
-        className="glass-panel"
         style={{
           width: '100%',
           maxWidth: '920px',
           borderRadius: 'var(--radius-md)',
           padding: '28px',
           position: 'relative',
-          background: 'var(--bg-surface)',
-          border: '1px solid var(--border-color)',
+          background: '#ffffff',
+          color: '#0f172a',
+          border: '1px solid rgba(0,0,0,0.1)',
           boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
           display: 'flex',
           flexDirection: 'column',

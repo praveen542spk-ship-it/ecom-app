@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { useCart } from '../services/CartContext'
 import { useAuth, API_URL } from '../services/AuthContext'
 import { useToast } from '../components/Toast'
 import ProductDetailModal from '../components/ProductDetailModal'
 
 function Products() {
-  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { dispatch } = useCart()
   const { isAuthenticated, getAuthHeaders } = useAuth()
@@ -152,22 +151,6 @@ function Products() {
     e.stopPropagation()
     dispatch({ type: 'ADD_ITEM', payload: product })
     addToast(`${product.title.substring(0, 20)}... added to cart!`, 'success')
-  }
-
-  const handleBuyNow = (e, product) => {
-    e.stopPropagation()
-    if (product.stock !== undefined && product.stock <= 0) {
-      addToast('Sorry, this product is out of stock.', 'error')
-      return
-    }
-    const itemWithVariant = {
-      ...product,
-      quantity: 1
-    }
-    localStorage.setItem('buy_now_item', JSON.stringify(itemWithVariant))
-    localStorage.setItem('is_buy_now', 'true')
-    addToast('Redirecting to secure checkout...', 'success')
-    navigate('/checkout?buyNow=true')
   }
 
   // Filter & Sort Logic
@@ -424,8 +407,8 @@ function Products() {
                     </div>
 
                     {/* Buy */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.05)', flexWrap: 'wrap', gap: '6px' }}>
-                      <span style={{ fontWeight: 700, fontSize: '16px', color: 'var(--text-main)' }}>₹{product.price.toLocaleString('en-IN')}</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.05)', flexWrap: 'wrap', gap: '8px' }}>
+                      <span style={{ fontWeight: 700, fontSize: '18px', color: 'var(--text-main)' }}>₹{product.price.toLocaleString('en-IN')}</span>
                       {isOutOfStock ? (
                         <button
                           onClick={(e) => e.stopPropagation()}
@@ -441,30 +424,12 @@ function Products() {
                           No Stock
                         </button>
                       ) : (
-                        <div style={{ display: 'flex', gap: '6px' }}>
-                          <button
-                            onClick={(e) => handleAddToCart(e, product)}
-                            className="btn-catalog-add"
-                            style={{ padding: '6px 10px', fontSize: '12px' }}
-                          >
-                            Add +
-                          </button>
-                          <button
-                            onClick={(e) => handleBuyNow(e, product)}
-                            className="btn-primary"
-                            style={{ 
-                              padding: '6px 12px', 
-                              fontSize: '12px', 
-                              fontWeight: 700, 
-                              background: '#ff9f00', 
-                              color: '#111', 
-                              border: '1px solid #f68f00',
-                              borderRadius: 'var(--radius-sm)'
-                            }}
-                          >
-                            Buy Now
-                          </button>
-                        </div>
+                        <button
+                          onClick={(e) => handleAddToCart(e, product)}
+                          className="btn-catalog-add"
+                        >
+                          Add +
+                        </button>
                       )}
                     </div>
                   </div>
