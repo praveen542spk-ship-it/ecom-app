@@ -57,6 +57,9 @@ if (!transporter) {
 // Local JSON Database Helpers
 function readDB() {
   try {
+    if (!fs.existsSync(DB_PATH)) {
+      return { users: [], orders: [], wishlists: [], reviews: [], products: [], coupons: [], config: {}, logs: [] }
+    }
     const data = fs.readFileSync(DB_PATH, 'utf8')
     const parsed = JSON.parse(data)
     
@@ -293,7 +296,8 @@ if (process.env.MONGODB_URI) {
     for (let i = 0; i < retries; i++) {
       try {
         await mongoose.connect(process.env.MONGODB_URI, {
-          serverSelectionTimeoutMS: 5000
+          serverSelectionTimeoutMS: 5000,
+          family: 4
         })
         console.log('✅ Connected to MongoDB Atlas.')
         useMongoDB = true
